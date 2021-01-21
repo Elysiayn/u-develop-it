@@ -1,4 +1,5 @@
 const express = require('express');
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -8,13 +9,12 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 
-//GET tests
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Hello World'
-    });
-});
+// Default response for any other requests(Not Found) Catch all
+app.use((req, res) => {
+    res.status(404).end();
+})
 
+//must be at bottom of page
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
